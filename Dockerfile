@@ -54,7 +54,8 @@ RUN yumdownloader -x \*i686 --archlist=x86_64 \
     gnutls \
     libtasn1 \
     lib64nettle \
-    nettle 
+    nettle \
+    libtool-ltdl
 
 RUN rpm2cpio clamav-0*.rpm | cpio -idmv
 RUN rpm2cpio clamav-lib*.rpm | cpio -idmv
@@ -70,6 +71,7 @@ RUN rpm2cpio nettle* | cpio -idmv
 RUN rpm2cpio lib* | cpio -idmv
 RUN rpm2cpio *.rpm | cpio -idmv
 RUN rpm2cpio libtasn1* | cpio -idmv
+RUN rpm2cpio libtool-ltdl* | cpio -idmv
 
 # Copy over the binaries and libraries
 RUN cp -r /tmp/usr/bin/clamscan /tmp/usr/bin/freshclam /tmp/usr/lib64/* /opt/app/bin/
