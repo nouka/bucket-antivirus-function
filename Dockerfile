@@ -72,17 +72,7 @@ RUN rpm2cpio *.rpm | cpio -idmv
 RUN rpm2cpio libtasn1* | cpio -idmv
 
 # Copy over the binaries and libraries
-RUN cp -r /tmp/usr/bin/clamdscan \
-    /tmp/usr/sbin/clamd \
-    /tmp/usr/bin/freshclam \
-    /tmp/usr/lib64/* \
-    /opt/app/bin/
-
-# Configure the scan.conf file
-RUN echo "DatabaseDirectory /tmp/clamav_defs" > /opt/app/bin/scan.conf
-RUN echo "PidFile /tmp/clamd.pid" >> /opt/app/bin/scan.conf
-RUN echo "LocalSocket /tmp/clamd.sock" >> /opt/app/bin/scan.conf
-RUN echo "LogFile /tmp/clamd.log" >> /opt/app/bin/scan.conf
+RUN cp -r /tmp/usr/bin/clamscan /tmp/usr/bin/freshclam /tmp/usr/lib64/* /opt/app/bin/
 
 # Fix the freshclam.conf settings
 RUN echo "DatabaseMirror database.clamav.net" > /opt/app/bin/freshclam.conf
